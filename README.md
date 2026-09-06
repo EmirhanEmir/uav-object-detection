@@ -49,7 +49,7 @@ data/                veri (git'e girmez)
 
 ```powershell
 ruff check .
-pytest
+pytest          # test paketi şu an yerelde
 ```
 
-CI: `.github/workflows/ci.yml` (ruff + pytest, her push/PR).
+CI: `.github/workflows/ci.yml` (şimdilik ruff; test paketi push edilince pytest eklenecek).

@@ -1,0 +1,13 @@
+# Örnek — gerçek configs/data.yaml `scripts/prepare_data.py` tarafından üretilir
+# (yerel mutlak yol içerdiği için git'e girmez).
+path: /mutlak/yol/data/uav_ldz
+train: train/images
+val: val/images
+test: test/images
+
+# Şartname sınıf sırası (SABİT) — car -> vehicle, uai <-> uap remap'lenmiş
+names:
+  0: vehicle
+  1: human
+  2: uap
+  3: uai
