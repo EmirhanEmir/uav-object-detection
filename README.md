@@ -12,10 +12,13 @@ TEKNOFEST Havacılıkta Yapay Zeka Yarışması, **Görev 1**.
 
 ## Kurulum
 
+Yerel ortam **hafiftir** (veri katmanı + değerlendirme, `torch` yok). Eğitim/çıkarım
+Colab'da yapılır (`requirements-train.txt`, bkz. `notebooks/colab_egitim.ipynb`).
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
-pip install -r requirements-dev.txt
+pip install -r requirements-dev.txt   # = requirements.txt + ruff/pytest/pre-commit
 pip install -e .
 pre-commit install
 ```

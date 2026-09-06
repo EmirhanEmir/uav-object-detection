@@ -1,0 +1,10 @@
+# Eğitim / çıkarım ortamı — genelde Colab (GPU). Yerelde kurmak zorunlu değil.
+-r requirements.txt
+
+# Tespit / eğitim
+ultralytics>=8.3.0
+torch>=2.2
+torchvision>=0.17
+
+# Dilimleme (SAHI — eğitim/çıkarım tiling)
+sahi>=0.11.18
