@@ -1,0 +1,12 @@
+# Ultralytics veri tanımı — yollar DATA_ROOT'a göre doldurulacak (Faz 1).
+path: ../data/uav_ldz
+train: images/train
+val: images/val
+test: images/test
+
+# Şartname sınıf sırası (sabit)
+names:
+  0: car
+  1: human
+  2: uap
+  3: uai

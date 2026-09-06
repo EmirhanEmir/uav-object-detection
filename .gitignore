@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+
+# Ortam / sırlar
+.env
+.env.*
+!.env.example
+
+# Veri ve ağırlıklar (git'e girmez)
+data/**
+!data/.gitkeep
+!data/README.md
+*.pt
+*.onnx
+*.engine
+*.pth
+
+# Eğitim çıktıları
+runs/
+wandb/
+lightning_logs/
+outputs/
+*.log
+
+# Notebook checkpoint
+.ipynb_checkpoints/
+
+# Editör / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Ajan çalışma alanı / iç kaynaklar (GitHub'a gitmez, yerelde kalır)
+CLAUDE.md
+AGENTS.md
+notes.md
+backlog.md
+backlog-log.md
+done-log.md
+knowledge.md
+skill.md
+sabitler.md
+reports/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/

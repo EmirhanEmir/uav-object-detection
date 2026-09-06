@@ -1,0 +1,21 @@
+# Baseline deney konfigi (Faz 3) — değerler ölçümden sonra kilitlenecek.
+name: baseline-yolo11s-p2
+
+model:
+  arch: yolo11s          # n/s/m — ölçümden sonra kilit
+  p2_head: true          # stride-4 küçük nesne başlığı
+  pretrained: coco       # coco -> (VisDrone) -> bizim veri
+
+data:
+  yaml: configs/data.yaml
+  imgsz: 1280
+
+train:
+  epochs: 100
+  batch: 16
+  device: 0
+  seed: 42
+
+eval:
+  iou: 0.5
+  protocol: [voc_attr, coco, faster_coco]

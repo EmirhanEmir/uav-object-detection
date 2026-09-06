@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Geliştirme araçları
+ruff>=0.6
+pytest>=8.0
+pytest-cov>=5.0
+pre-commit>=3.7
