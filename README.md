@@ -1,4 +1,4 @@
-# UAV Landing Zone Detection
+# UAV Object Detection
 
 İHA alt-görüş kamera karelerinde **nesne tespiti** ve **iniş alanı uygunluğu** —
 TEKNOFEST Havacılıkta Yapay Zeka Yarışması, **Görev 1**.
@@ -36,7 +36,7 @@ python scripts/predict.py --source frames/ --weights runs/best.pt
 ## Yapı
 
 ```
-src/uav_landing/     paket: data / detector / eval / utils
+src/uav_vision/     paket: data / detector / eval / utils
 configs/             yaml deney konfigleri
 scripts/             train / evaluate / predict girişleri
 tests/               pytest

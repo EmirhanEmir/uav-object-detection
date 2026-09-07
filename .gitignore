@@ -57,7 +57,7 @@ configs/data.yaml
 # Veri hazırlık ayağı + testler — şimdilik push edilmiyor (yerelde kalır)
 scripts/prepare_data.py
 scripts/prepare_sanity.py
-src/uav_landing/data/
+src/uav_vision/data/
 tests/
 
 # Test / coverage
