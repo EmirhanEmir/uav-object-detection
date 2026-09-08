@@ -1,9 +1,8 @@
 # UAV Object Detection
 
-İHA alt-görüş kamera karelerinde **nesne tespiti** ve **iniş alanı uygunluğu** —
-TEKNOFEST Havacılıkta Yapay Zeka Yarışması, **Görev 1**.
+İHA alt-görüş kamera karelerinde **nesne tespiti** ve **iniş alanı uygunluğu** 
 
-- **Girdi:** alt-görüş (70–90°) drone kareleri, 1920×1080
+- **Girdi:** alt-görüş drone kareleri
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
