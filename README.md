@@ -51,3 +51,11 @@ pytest          # test paketi şu an yerelde
 ```
 
 CI: `.github/workflows/ci.yml` (şimdilik ruff; test paketi push edilince pytest eklenecek).
+
+## Lisans
+
+[AGPL-3.0-or-later](LICENSE). Eğitim/çıkarım Ultralytics YOLO'ya (AGPL-3.0) dayandığı
+için proje de aynı güçlü copyleft lisansıyla yayınlanır: bu kodu dağıtan veya ağ
+servisi olarak sunan, kaynağını AGPL ile açmak zorundadır.
+
+Veri seti (Roboflow export) ayrı şartlara tabidir (CC BY 4.0) ve bu depoya dahil değildir.

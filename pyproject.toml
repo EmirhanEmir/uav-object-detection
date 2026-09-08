@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "İHA alt-görüş kamera karelerinde nesne tespiti ve iniş alanı uygunluğu (TEKNOFEST Havacılıkta Yapay Zeka — Görev 1)"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Proprietary" }
+license = { text = "AGPL-3.0-or-later" }
 authors = [{ name = "Emirhan" }]
 
 [tool.setuptools.packages.find]
