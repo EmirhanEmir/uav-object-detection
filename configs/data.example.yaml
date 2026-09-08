@@ -1,11 +1,11 @@
-# Örnek — gerçek configs/data.yaml `scripts/prepare_data.py` tarafından üretilir
-# (yerel mutlak yol içerdiği için git'e girmez).
+# Örnek — bu dosyayı configs/data.yaml olarak kopyalayıp `path` değerini
+# kendi verinin kök dizinine ayarla. configs/data.yaml git'e girmez.
 path: /mutlak/yol/data/uav_ldz
 train: train/images
 val: val/images
 test: test/images
 
-# Şartname sınıf sırası (SABİT) — car -> vehicle, uai <-> uap remap'lenmiş
+# Sınıf sırası (sabit)
 names:
   0: vehicle
   1: human

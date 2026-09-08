@@ -3,7 +3,7 @@
 Kullanım:
     python scripts/predict.py --source path/to/frames --weights runs/best.pt
 
-Not: Faz 3+ ile doldurulacak (SAHI tiling + tam-kare birleşimi).
+Not: sonraki sürümde doldurulacak (SAHI tiling + tam-kare birleşimi).
 """
 
 from __future__ import annotations

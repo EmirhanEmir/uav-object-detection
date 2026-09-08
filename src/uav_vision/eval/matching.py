@@ -8,7 +8,7 @@ Puanlama:
     Hiç eşleşmeyen GT -> FN.
 
 Bu modül öznitelik (hareket/iniş) bakmaz; sadece kutu + sınıf. Öznitelik-koşullu
-skorlama Faz 7'ye bırakıldı.
+skorlama sonraki bir sürüme bırakıldı.
 """
 
 from __future__ import annotations

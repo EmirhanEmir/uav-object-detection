@@ -6,7 +6,7 @@
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
-> Durum: **baseline eğitimi (Faz 3)** — veri katmanı ve mAP@0.5 değerlendirme aracı hazır.
+> Durum: **baseline eğitimi** — veri katmanı ve mAP@0.5 değerlendirme aracı hazır.
 
 ## Kurulum
 
@@ -26,18 +26,17 @@ pre-commit install
 ## Kullanım
 
 ```powershell
-python scripts/train.py --config configs/baseline.yaml   # eğitim (Faz 3)
-python scripts/evaluate.py preds.json gt.json            # mAP@0.5 (Faz 2)
+python scripts/train.py --config configs/baseline.yaml   # eğitim
+python scripts/evaluate.py preds.json gt.json            # mAP@0.5
 python scripts/predict.py --source frames/ --weights runs/best.pt
 ```
 
 ## Yapı
 
 ```
-src/uav_vision/     paket: data / detector / eval / utils
+src/uav_vision/     paket: detector / eval / utils
 configs/             yaml deney konfigleri
 scripts/             train / evaluate / predict girişleri
-tests/               pytest
 notebooks/           Colab defterleri
 docs/                dokümantasyon
 data/                veri (git'e girmez)
@@ -47,10 +46,9 @@ data/                veri (git'e girmez)
 
 ```powershell
 ruff check .
-pytest          # test paketi şu an yerelde
 ```
 
-CI: `.github/workflows/ci.yml` (şimdilik ruff; test paketi push edilince pytest eklenecek).
+CI: `.github/workflows/ci.yml` (ruff).
 
 ## Lisans
 

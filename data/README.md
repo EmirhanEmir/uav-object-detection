@@ -6,11 +6,12 @@ Beklenen yerleşim:
 
 ```
 data/
-├── raw/                 # Roboflow export'ları (dokunulmaz)
+├── raw/                 # etiketli export'lar (dokunulmaz)
 ├── uav_ldz/             # işlenmiş, eğitime hazır (YOLO formatı)
 │   ├── images/{train,val,test}
 │   └── labels/{train,val,test}
 └── coco/                # COCO json'lar (eval için)
 ```
 
-Export alma ve remap adımları: `notes.md` → Faz 1.
+Export alma, sınıf remap ve dönüştürme adımları yerelde yürütülür; bu adımların
+kodu ve verinin kendisi depoya dahil değildir.

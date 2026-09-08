@@ -7,7 +7,7 @@ Kullanım:
 - preds.json : COCO "results" formatı [{image_id, category_id, bbox, score}, ...]
 - gt.json    : COCO instances formatı (data/coco/instances_*.json)
 
-Öznitelik (hareket/iniş) skorlaması bu fazda yok — bkz. notes.md Faz 2.
+Öznitelik (hareket/iniş) skorlaması bu sürümde yok — yalnız bbox + sınıf.
 """
 
 from __future__ import annotations

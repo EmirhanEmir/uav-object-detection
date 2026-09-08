@@ -39,7 +39,7 @@ outputs/
 .DS_Store
 Thumbs.db
 
-# Ajan çalışma alanı / iç kaynaklar (GitHub'a gitmez, yerelde kalır)
+# Yerel çalışma / not dosyaları
 CLAUDE.md
 AGENTS.md
 notes.md
@@ -51,10 +51,10 @@ skill.md
 sabitler.md
 reports/
 
-# Üretilen config (yerel mutlak yol) — örnek: configs/data.example.yaml
+# Üretilen config (yerel mutlak yol) — bkz. configs/data.example.yaml
 configs/data.yaml
 
-# Veri hazırlık ayağı + testler — şimdilik push edilmiyor (yerelde kalır)
+# Yerelde tutulan modüller
 scripts/prepare_data.py
 scripts/prepare_sanity.py
 src/uav_vision/data/

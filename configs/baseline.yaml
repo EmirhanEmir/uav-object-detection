@@ -1,28 +1,28 @@
-# Baseline deney konfigi (Faz 3) — YOLO11s + P2 başlığı, tam kare (SAHI YOK).
-# Bu skor sonraki tüm fazların (transfer, SAHI, iyileştirme) referans noktası.
+# Baseline deney konfigi — YOLO11s + P2 başlığı, tam kare (dilimleme YOK).
+# Bu skor sonraki denemelerin (transfer, dilimleme, iyileştirme) referans noktası.
 name: baseline-yolo11s-p2
 
 model:
-  arch: yolo11s              # n/s/m/l/x — onaylı: s
+  arch: yolo11s              # n/s/m/l/x
   p2_head: true              # configs/yolo11-p2.yaml (stride-4 küçük nesne başlığı)
-  pretrained: coco           # coco -> (Faz 4: VisDrone) -> bizim veri
+  pretrained: coco           # COCO ağırlığından fine-tune
 
 data:
   yaml: configs/data.yaml
-  imgsz: 1280                # tam kare letterbox; SAHI dilimleme Faz 5
+  imgsz: 1280                # tam kare letterbox; dilimleme ayrı bir deneme
 
 train:
   epochs: 150
-  batch: 32                  # A100 40GB @ imgsz 1280, yolo11s-p2 (-1 = otomatik)
+  batch: 32                  # ~40GB GPU @ imgsz 1280, yolo11s-p2 (-1 = otomatik)
   patience: 40               # early stop
   close_mosaic: 15           # son 15 epoch mozaik kapalı
   device: 0
   seed: 42
-  project: runs/faz3
+  project: runs/baseline
   workers: 8
 
 eval:
   iou: 0.5
-  # eğitim sonrası: Ultralytics val (hızlı) + bizim eval aracı (resmi referans)
+  # eğitim sonrası: Ultralytics val (hızlı) + kendi eval aracı (resmi referans)
   # scripts/predict_to_coco.py -> scripts/evaluate.py
-  splits: [test, sanity]
+  splits: [test]

@@ -1,4 +1,4 @@
-"""Eğitim girişi — Faz 3 baseline (YOLO11s + P2 başlığı, tam kare fine-tune).
+"""Eğitim girişi — baseline (YOLO11s + P2 başlığı, tam kare fine-tune).
 
 Kullanım (Colab):
     python scripts/train.py --config configs/baseline.yaml
@@ -29,7 +29,7 @@ def _load_config(path: str) -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Detektör eğitimi (Faz 3 baseline)")
+    parser = argparse.ArgumentParser(description="Detektör eğitimi (baseline)")
     parser.add_argument("--config", default="configs/baseline.yaml", help="YAML deney konfigi")
     # Colab'da hızlı override — verilmezse config'teki değer kullanılır.
     parser.add_argument("--epochs", type=int)
@@ -75,7 +75,7 @@ def main() -> None:
         device=device,
         seed=t.get("seed", 42),
         workers=t.get("workers", 8),
-        project=t.get("project", "runs/faz3"),
+        project=t.get("project", "runs/baseline"),
         name=cfg["name"],
         resume=args.resume,
         plots=True,

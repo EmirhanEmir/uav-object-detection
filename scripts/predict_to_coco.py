@@ -1,7 +1,6 @@
 """Eğitilmiş modeli bir split üzerinde çalıştır -> COCO "results" JSON üret.
 
-    python scripts/predict_to_coco.py runs/faz3/baseline-yolo11s-p2/weights/best.pt test
-    python scripts/predict_to_coco.py <best.pt> sanity --out preds_sanity.json --conf 0.001
+    python scripts/predict_to_coco.py runs/baseline/baseline-yolo11s-p2/weights/best.pt test
 
 Çıktı scripts/evaluate.py'ye girer:
     python scripts/evaluate.py preds_test.json data/coco/instances_test.json --cross-check
@@ -16,12 +15,11 @@ import argparse
 import json
 from pathlib import Path
 
-# split -> (görsel klasörü, GT json)
+# split -> (görsel klasörü, GT json). Yerleşim için bkz. data/README.md
 SPLITS = {
     "train": ("data/uav_ldz/train/images", "data/coco/instances_train.json"),
     "val": ("data/uav_ldz/val/images", "data/coco/instances_val.json"),
     "test": ("data/uav_ldz/test/images", "data/coco/instances_test.json"),
-    "sanity": ("data/sanity/images", "data/coco/instances_sanity.json"),
 }
 
 

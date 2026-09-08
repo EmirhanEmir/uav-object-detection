@@ -24,5 +24,3 @@ jobs:
 
       - name: Ruff
         run: ruff check .
-
-      # Not: tests/ şimdilik push edilmiyor; testler geri gelince pytest adımı eklenecek.
