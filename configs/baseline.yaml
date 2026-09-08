@@ -1,21 +1,28 @@
-# Baseline deney konfigi (Faz 3) — değerler ölçümden sonra kilitlenecek.
+# Baseline deney konfigi (Faz 3) — YOLO11s + P2 başlığı, tam kare (SAHI YOK).
+# Bu skor sonraki tüm fazların (transfer, SAHI, iyileştirme) referans noktası.
 name: baseline-yolo11s-p2
 
 model:
-  arch: yolo11s          # n/s/m — ölçümden sonra kilit
-  p2_head: true          # stride-4 küçük nesne başlığı
-  pretrained: coco       # coco -> (VisDrone) -> bizim veri
+  arch: yolo11s              # n/s/m/l/x — onaylı: s
+  p2_head: true              # configs/yolo11-p2.yaml (stride-4 küçük nesne başlığı)
+  pretrained: coco           # coco -> (Faz 4: VisDrone) -> bizim veri
 
 data:
   yaml: configs/data.yaml
-  imgsz: 1280
+  imgsz: 1280                # tam kare letterbox; SAHI dilimleme Faz 5
 
 train:
-  epochs: 100
-  batch: 16
+  epochs: 150
+  batch: 32                  # A100 40GB @ imgsz 1280, yolo11s-p2 (-1 = otomatik)
+  patience: 40               # early stop
+  close_mosaic: 15           # son 15 epoch mozaik kapalı
   device: 0
   seed: 42
+  project: runs/faz3
+  workers: 8
 
 eval:
   iou: 0.5
-  protocol: [voc_attr, coco, faster_coco]
+  # eğitim sonrası: Ultralytics val (hızlı) + bizim eval aracı (resmi referans)
+  # scripts/predict_to_coco.py -> scripts/evaluate.py
+  splits: [test, sanity]
