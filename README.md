@@ -7,8 +7,7 @@ TEKNOFEST Havacılıkta Yapay Zeka Yarışması, **Görev 1**.
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
-> Durum: **altyapı kurulumu (Faz 0)**. Yol haritası ve kararlar kök dizindeki
-> `notes.md` dosyasında.
+> Durum: **baseline eğitimi (Faz 3)** — veri katmanı ve mAP@0.5 değerlendirme aracı hazır.
 
 ## Kurulum
 
