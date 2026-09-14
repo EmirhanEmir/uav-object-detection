@@ -20,6 +20,8 @@ SPLITS = {
     "train": ("data/uav_ldz/train/images", "data/coco/instances_train.json"),
     "val": ("data/uav_ldz/val/images", "data/coco/instances_val.json"),
     "test": ("data/uav_ldz/test/images", "data/coco/instances_test.json"),
+    # Eğitimde hiç görülmeyen ayrı kaynak (Roboflow) — gerçek genelleme kontrolü.
+    "sanity": ("data/sanity/images", "data/coco/instances_sanity.json"),
 }
 
 

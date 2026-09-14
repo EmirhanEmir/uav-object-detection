@@ -6,7 +6,7 @@
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
-> Durum: **baseline eğitimi** — veri katmanı ve mAP@0.5 değerlendirme aracı hazır.
+> Durum: **baseline sonucu alındı** — sanity (yarışma verisi) referans mAP@0.5 = 0.8048.
 
 ## Kurulum
 
@@ -30,6 +30,23 @@ python scripts/train.py --config configs/baseline.yaml   # eğitim
 python scripts/evaluate.py preds.json gt.json            # mAP@0.5
 python scripts/predict.py --source frames/ --weights runs/best.pt
 ```
+
+## Baseline sonuçları
+
+YOLO11s + P2 başlığı, imgsz 1280, 150 epoch, COCO ağırlığından fine-tune
+(`configs/baseline.yaml`, `uav_runs/faz3/baseline-yolo11s-p2`).
+
+Referans skor **sanity** verisi (`data/sanity`, yarışma verisiyle aynı kaynak,
+model tarafından hiç görülmemiş) üzerinden alınır; kendi test split'imiz
+(`data/uav_ldz/test`, eğitimle aynı dağılım) yalnızca yardımcı kontroldür.
+
+| Split | mAP@0.5 (VOC) | vehicle | human | uap | uai |
+|---|---|---|---|---|---|
+| **sanity (referans)** | **0.8048** | 0.8622 | 0.3776 | 0.9922 | 0.9872 |
+| test (kendi split) | 0.9658 | 0.9802 | 0.9210 | 0.9798 | 0.9823 |
+
+`human` sınıfı sanity verisinde ciddi geneleme sorunu gösteriyor (çok yüksek
+false-positive) — açık iyileştirme konusu.
 
 ## Yapı
 
