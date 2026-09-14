@@ -59,6 +59,7 @@ scripts/prepare_data.py
 scripts/prepare_sanity.py
 src/uav_vision/data/
 tests/
+notebooks/colab_egitim.ipynb
 
 # Test / coverage
 .pytest_cache/
