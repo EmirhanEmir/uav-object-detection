@@ -34,7 +34,7 @@ python scripts/predict.py --source frames/ --weights runs/best.pt
 ## Baseline sonuçları
 
 YOLO11s + P2 başlığı, imgsz 1280, 150 epoch, COCO ağırlığından fine-tune
-(`configs/baseline.yaml`, `uav_runs/faz3/baseline-yolo11s-p2`).
+(`configs/baseline.yaml`).
 
 Referans skor **sanity** verisi (`data/sanity`, yarışma verisiyle aynı kaynak,
 model tarafından hiç görülmemiş) üzerinden alınır; kendi test split'imiz
@@ -51,8 +51,7 @@ false-positive) — açık iyileştirme konusu.
 ## Faz 4 — VisDrone ara-domain transfer
 
 İki aşamalı transfer: COCO → VisDrone-DET (60 epoch, ara-domain) → bizim veri
-son fine-tune (`configs/visdrone-pretrain.yaml` + `configs/baseline-visdrone.yaml`,
-`uav_runs/visdrone_pre/faz4/baseline-visdrone-yolo11s-p2`).
+son fine-tune (`configs/visdrone-pretrain.yaml` + `configs/baseline-visdrone.yaml`).
 
 | Split | mAP@0.5 (VOC) | vehicle | human | uap | uai |
 |---|---|---|---|---|---|
