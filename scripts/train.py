@@ -52,17 +52,25 @@ def main() -> None:
 
     model = YOLO(model_yaml)
 
-    if m.get("pretrained") == "coco":
+    pretrained = m.get("pretrained")
+    if pretrained == "coco":
         weights = f"{arch}.pt"            # Ultralytics otomatik indirir
         print(f"[transfer] COCO ağırlığı yükleniyor: {weights} (omurga; P2 head sıfırdan)")
         model.load(weights)
+    elif pretrained:
+        # Faz 4 aşama 2: ara-domain (ör. VisDrone) çıktısından başla — kendi .pt yolu.
+        print(f"[transfer] Ara-domain ağırlığı yükleniyor: {pretrained} (omurga; head sıfırdan)")
+        model.load(pretrained)
 
     imgsz = args.imgsz or d["imgsz"]
     epochs = args.epochs or t["epochs"]
     batch = args.batch if args.batch is not None else t["batch"]
     device = args.device or t.get("device", 0)
 
-    data_yaml = str(Path(d["yaml"]).resolve())
+    # Yerel dosya yolu ise mutlak yola çevir; Ultralytics'in yerleşik veri seti adıysa
+    # (ör. VisDrone.yaml — kendi mekanizmasıyla bulur/indirir) olduğu gibi bırak.
+    data_path = Path(d["yaml"])
+    data_yaml = str(data_path.resolve()) if data_path.exists() else d["yaml"]
     print(f"[eğitim] arch={arch}+P2 imgsz={imgsz} epochs={epochs} batch={batch} device={device}")
 
     model.train(

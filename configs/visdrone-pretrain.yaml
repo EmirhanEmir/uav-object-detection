@@ -1,0 +1,28 @@
+# Faz 4 — ara-domain eğitim (aşama 1): COCO -> VisDrone-DET.
+# Amaç bizim 4 sınıf değil; backbone'u drone bakışı + küçük nesneye alıştırmak.
+# Çıktı ağırlığı (best.pt) aşama 2'de (configs/baseline-visdrone.yaml) başlangıç noktası olur.
+# VisDrone lisansı akademik/ticari-olmayan — teslim öncesi şartname netleşmeden ürünleştirme.
+name: visdrone-pretrain-yolo11s-p2
+
+model:
+  arch: yolo11s
+  p2_head: true
+  pretrained: coco
+
+data:
+  yaml: VisDrone.yaml        # Ultralytics yerleşik config, ilk çalıştırmada otomatik indirir
+  imgsz: 1280
+
+train:
+  epochs: 60
+  batch: 32
+  patience: 20
+  close_mosaic: 10
+  device: 0
+  seed: 42
+  project: runs/faz4
+  workers: 8
+
+eval:
+  iou: 0.5
+  splits: [test]

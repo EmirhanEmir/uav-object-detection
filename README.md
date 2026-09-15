@@ -6,12 +6,12 @@
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
-> Durum: **baseline sonucu alındı** — sanity (yarışma verisi) referans mAP@0.5 = 0.8048.
+> Durum: **Faz 4 (VisDrone transfer) sonucu alındı** — sanity (yarışma verisi) referans mAP@0.5 = 0.8203.
 
 ## Kurulum
 
 Yerel ortam **hafiftir** (veri katmanı + değerlendirme, `torch` yok). Eğitim/çıkarım
-Colab'da yapılır (`requirements-train.txt`, bkz. `notebooks/colab_egitim.ipynb`).
+Colab'da yapılır (`requirements-train.txt`).
 
 ```powershell
 python -m venv .venv
@@ -34,7 +34,7 @@ python scripts/predict.py --source frames/ --weights runs/best.pt
 ## Baseline sonuçları
 
 YOLO11s + P2 başlığı, imgsz 1280, 150 epoch, COCO ağırlığından fine-tune
-(`configs/baseline.yaml`, `uav_runs/faz3/baseline-yolo11s-p2`).
+(`configs/baseline.yaml`).
 
 Referans skor **sanity** verisi (`data/sanity`, yarışma verisiyle aynı kaynak,
 model tarafından hiç görülmemiş) üzerinden alınır; kendi test split'imiz
@@ -48,13 +48,28 @@ model tarafından hiç görülmemiş) üzerinden alınır; kendi test split'imiz
 `human` sınıfı sanity verisinde ciddi geneleme sorunu gösteriyor (çok yüksek
 false-positive) — açık iyileştirme konusu.
 
+## Faz 4 — VisDrone ara-domain transfer
+
+İki aşamalı transfer: COCO → VisDrone-DET (60 epoch, ara-domain) → bizim veri
+son fine-tune (`configs/visdrone-pretrain.yaml` + `configs/baseline-visdrone.yaml`).
+
+| Split | mAP@0.5 (VOC) | vehicle | human | uap | uai |
+|---|---|---|---|---|---|
+| **sanity (referans)** | **0.8203** | 0.8600 | **0.4559** | 0.9843 | 0.9808 |
+| test (kendi split) | 0.9662 | 0.9795 | 0.9163 | 0.9797 | 0.9891 |
+
+Faz 3'e göre +0.0155 mAP@0.5 (sanity), `human` AP'sinde +0.078 — VisDrone ön-eğitimi
+işe yarıyor ama sınırlı. `human` sınıfındaki asıl darboğaz sanity görsellerinde
+insanların **çok küçük ve bazılarında düşük çözünürlüklü** olması — ara-domain
+transferi bunu kısmen telafi ediyor, kökten çözmüyor. Sıradaki aday: SAHI/tiling
+(Faz 5), küçük nesnede daha doğrudan etkili olması beklenen adım.
+
 ## Yapı
 
 ```
 src/uav_vision/     paket: detector / eval / utils
 configs/             yaml deney konfigleri
 scripts/             train / evaluate / predict girişleri
-notebooks/           Colab defterleri
 docs/                dokümantasyon
 data/                veri (git'e girmez)
 ```
