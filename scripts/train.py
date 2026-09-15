@@ -89,9 +89,10 @@ def main() -> None:
         plots=True,
     )
 
-    # Eğitim sonrası hızlı kontrol — test split (Ultralytics kendi mAP'i).
-    metrics = model.val(data=data_yaml, imgsz=imgsz, split="test", iou=cfg["eval"]["iou"])
-    print(f"\n[test / Ultralytics val] mAP50={metrics.box.map50:.4f}  mAP50-95={metrics.box.map:.4f}")
+    # Eğitim sonrası hızlı kontrol (Ultralytics kendi mAP'i) — config'teki ilk split.
+    quick_split = cfg["eval"]["splits"][0]
+    metrics = model.val(data=data_yaml, imgsz=imgsz, split=quick_split, iou=cfg["eval"]["iou"])
+    print(f"\n[{quick_split} / Ultralytics val] mAP50={metrics.box.map50:.4f}  mAP50-95={metrics.box.map:.4f}")
     print("Sınıf-başı AP50:", {model.names[i]: round(float(ap), 4)
                                for i, ap in zip(metrics.box.ap_class_index, metrics.box.ap50, strict=True)})
     print("\nResmi referans skor için: scripts/predict_to_coco.py + scripts/evaluate.py")

@@ -54,6 +54,7 @@ reports/
 
 # Üretilen config (yerel mutlak yol) — bkz. configs/data.example.yaml
 configs/data.yaml
+configs/data_tiled.yaml
 
 # Yerelde tutulan modüller
 scripts/prepare_data.py
@@ -61,6 +62,11 @@ scripts/prepare_sanity.py
 src/uav_vision/data/
 tests/
 notebooks/
+
+# Kök dizinde geçici/deneme betikleri (asla commit edilmez)
+/_*.sh
+/_*.py
+/_*.json
 
 # Test / coverage
 .pytest_cache/
