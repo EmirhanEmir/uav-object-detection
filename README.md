@@ -6,7 +6,7 @@
 - **Çıktı:** taşıt / insan / UAP / UAİ tespitleri (bbox + sınıf), iniş alanı uygunluğu
 - **Metrik:** mAP @ IoU 0.5
 
-> Durum: **Faz 4 (VisDrone transfer) sonucu alındı** — sanity (yarışma verisi) referans mAP@0.5 = 0.8203.
+> Durum: **Faz 5 (SAHI tile ablasyonu) sonucu alındı** — sanity (yarışma verisi) referans mAP@0.5 = 0.8419.
 
 ## Kurulum
 
@@ -63,6 +63,17 @@ işe yarıyor ama sınırlı. `human` sınıfındaki asıl darboğaz sanity gör
 insanların **çok küçük ve bazılarında düşük çözünürlüklü** olması — ara-domain
 transferi bunu kısmen telafi ediyor, kökten çözmüyor. Sıradaki aday: SAHI/tiling
 (Faz 5), küçük nesnede daha doğrudan etkili olması beklenen adım.
+
+## Faz 5 — SAHI tile ablasyonu
+
+Faz 4 ağırlığı üstünde, yerelde (RTX 4060 Laptop) çıkarımda SAHI dilimleme denendi;
+6 tile boyutu/overlap kombinasyonu sanity split'inde kıyaslandı
+(`scripts/ablate_tiling.py`, sonuçlar `results/detect_tile_ablasyonu/`).
+
+Kazanan: **tile=1024, overlap=%30** → sanity mAP@0.5 = **0.8419** (Faz 4'e göre
++0.0216), `human` AP = 0.5664 (+0.11), FPS = 2.64 (hız bütçesinin çok üstünde).
+Beklenmedik bulgu: küçük tile (512) daha kötü sonuç veriyor — aşırı parçalanma
+false-positive'i patlatıyor. Karar `sabitler.md`'ye kilitlendi.
 
 ## Yapı
 
