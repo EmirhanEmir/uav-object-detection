@@ -1,0 +1,28 @@
+# Faz 4 — aşama 2: VisDrone ara-domain ağırlığından bizim veriye son fine-tune.
+# `pretrained` alanını aşama 1'in (configs/visdrone-pretrain.yaml) çıktısına göre doldur.
+# Diğer her şey configs/baseline.yaml (Faz 3) ile birebir aynı — tek fark başlangıç ağırlığı,
+# kıyas adil olsun diye.
+name: baseline-visdrone-yolo11s-p2
+
+model:
+  arch: yolo11s
+  p2_head: true
+  pretrained: runs/faz4/visdrone-pretrain-yolo11s-p2/weights/best.pt
+
+data:
+  yaml: configs/data.yaml
+  imgsz: 1280
+
+train:
+  epochs: 150
+  batch: 32
+  patience: 40
+  close_mosaic: 15
+  device: 0
+  seed: 42
+  project: runs/faz4
+  workers: 8
+
+eval:
+  iou: 0.5
+  splits: [test]
