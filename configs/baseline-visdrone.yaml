@@ -1,5 +1,5 @@
 # Faz 4 — aşama 2: VisDrone ara-domain ağırlığından bizim veriye son fine-tune.
-# `pretrained` alanını aşama 1'in çıktısına göre doldur (bkz. notebooks/colab_egitim.ipynb §4b).
+# `pretrained` alanını aşama 1'in (configs/visdrone-pretrain.yaml) çıktısına göre doldur.
 # Diğer her şey configs/baseline.yaml (Faz 3) ile birebir aynı — tek fark başlangıç ağırlığı,
 # kıyas adil olsun diye.
 name: baseline-visdrone-yolo11s-p2

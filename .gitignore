@@ -25,6 +25,7 @@ data/**
 
 # Eğitim çıktıları
 runs/
+uav_runs/
 wandb/
 lightning_logs/
 outputs/
@@ -59,7 +60,7 @@ scripts/prepare_data.py
 scripts/prepare_sanity.py
 src/uav_vision/data/
 tests/
-notebooks/colab_egitim.ipynb
+notebooks/
 
 # Test / coverage
 .pytest_cache/
