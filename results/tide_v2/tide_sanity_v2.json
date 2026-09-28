@@ -1,0 +1,117 @@
+{
+  "TÜMÜ": {
+    "ap50": 84.45,
+    "dAP": {
+      "Cls": 0.05,
+      "Loc": 1.85,
+      "Both": 0.04,
+      "Dupe": 0.01,
+      "Bkg": 6.8,
+      "Miss": 2.27
+    },
+    "dAP_special": {
+      "FalsePos": 10.85,
+      "FalseNeg": 3.24
+    },
+    "count": {
+      "Cls": 11,
+      "Loc": 232,
+      "Both": 27,
+      "Dupe": 7,
+      "Bkg": 3104,
+      "Miss": 18
+    }
+  },
+  "vehicle": {
+    "ap50": 89.51,
+    "dAP": {
+      "Cls": 0.2,
+      "Loc": 1.1,
+      "Both": 0,
+      "Dupe": 0.02,
+      "Bkg": 2.57,
+      "Miss": 3.88
+    },
+    "dAP_special": {
+      "FalsePos": 4.55,
+      "FalseNeg": 5.01
+    },
+    "count": {
+      "Cls": 8,
+      "Loc": 193,
+      "Both": 6,
+      "Dupe": 5,
+      "Bkg": 1611,
+      "Miss": 13
+    }
+  },
+  "human": {
+    "ap50": 54.34,
+    "dAP": {
+      "Cls": 0.01,
+      "Loc": 4.52,
+      "Both": 0.14,
+      "Dupe": 0.0,
+      "Bkg": 20.48,
+      "Miss": 5.19
+    },
+    "dAP_special": {
+      "FalsePos": 32.79,
+      "FalseNeg": 7.94
+    },
+    "count": {
+      "Cls": 3,
+      "Loc": 38,
+      "Both": 21,
+      "Dupe": 2,
+      "Bkg": 1397,
+      "Miss": 5
+    }
+  },
+  "uap": {
+    "ap50": 97.67,
+    "dAP": {
+      "Cls": 0.0,
+      "Loc": 0.0,
+      "Both": 0.0,
+      "Dupe": 0.0,
+      "Bkg": 2.33,
+      "Miss": 0.0
+    },
+    "dAP_special": {
+      "FalsePos": 2.33,
+      "FalseNeg": 0.0
+    },
+    "count": {
+      "Cls": 0,
+      "Loc": 0,
+      "Both": 0,
+      "Dupe": 0,
+      "Bkg": 75,
+      "Miss": 0
+    }
+  },
+  "uai": {
+    "ap50": 96.28,
+    "dAP": {
+      "Cls": 0.0,
+      "Loc": 1.79,
+      "Both": 0.0,
+      "Dupe": 0.0,
+      "Bkg": 1.82,
+      "Miss": 0.0
+    },
+    "dAP_special": {
+      "FalsePos": 3.72,
+      "FalseNeg": 0.0
+    },
+    "count": {
+      "Cls": 0,
+      "Loc": 1,
+      "Both": 0,
+      "Dupe": 0,
+      "Bkg": 21,
+      "Miss": 0
+    }
+  }
+}
