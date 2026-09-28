@@ -28,7 +28,7 @@ pre-commit install
 ```powershell
 python scripts/train.py --config configs/baseline.yaml   # eğitim
 python scripts/evaluate.py preds.json gt.json            # mAP@0.5
-python scripts/predict.py --source frames/ --weights runs/best.pt
+python main.py --source frames/                          # ana tespit (aktif sürüm)
 ```
 
 ## Baseline sonuçları
