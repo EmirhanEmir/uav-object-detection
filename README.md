@@ -155,9 +155,15 @@ docs/                   mimari ve görseller
 
 ## Yol haritası
 
+- **Taşıt hareket durumu:** her `vehicle` tespitinin hareketli mi duran mı olduğunu
+  belirlemek. Kamera da hareket ettiği için görüntüdeki yer değiştirme tek başına yetmiyor:
+  önce kamera hareketi (ego-motion) kestirilip telafi edilecek, ardından kareler arası takip
+  ile taşıtın zemine göre hareketi ölçülecek.
+- **İniş alanı uygunluğu:** tespit edilen `uap` / `uai` işaretlerinin iniş için uygun olup
+  olmadığına karar vermek. İşaretin üzerinde ya da yakınında insan veya taşıt bulunup
+  bulunmadığı ve işaretin kare içinde tam görünüp görünmediği kontrol edilecek.
 - Daha büyük bir değerlendirme seti (holdout'taki 57 insan kutusu kararları gürültülü bırakıyor)
 - `human` için arka plan yanlış pozitiflerini azaltma (hard negative'ler, veri çeşitlendirme)
-- İniş alanı uygunluğu ve nesne hareket durumu (ego-motion + takip)
 
 ## Lisans
 
