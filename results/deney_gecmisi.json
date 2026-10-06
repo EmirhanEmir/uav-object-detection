@@ -1,0 +1,9 @@
+{
+  "aciklama": "Aşama aşama holdout sonuçları (175 kare, mAP@0.5, VOC tüm-nokta AP). Kaynaklar: ilk iki aşama eğitim sonrası kendi evaluator'ümüz; SAHI satırı detect_tile_ablasyonu/tile_ablation_holdout.json (tile=1024, %30); V2 satırı cikarim_maliyet_ablasyonu/varyant_birlestirme_grid.json (V2, NMS/IOU/0.5/cls).",
+  "asamalar": [
+    {"ad": "Baseline", "detay": "YOLO11s-p2, COCO → veri seti, tam kare", "map": 0.8048, "vehicle": 0.8622, "human": 0.3776, "uap": 0.9922, "uai": 0.9872, "ms_kare": null},
+    {"ad": "+ VisDrone transfer", "detay": "COCO → VisDrone-DET → veri seti, tam kare", "map": 0.8203, "vehicle": 0.8600, "human": 0.4559, "uap": 0.9843, "uai": 0.9808, "ms_kare": null},
+    {"ad": "+ SAHI dilimleme", "detay": "6 × 1024 tile (%30) @1280 + tam kare", "map": 0.8419, "vehicle": 0.8923, "human": 0.5664, "uap": 0.9917, "uai": 0.9172, "ms_kare": 303},
+    {"ad": "V2 (son)", "detay": "2 × 1080 tile @1280 + tam kare", "map": 0.8457, "vehicle": 0.8989, "human": 0.5432, "uap": 0.9776, "uai": 0.9629, "ms_kare": 154}
+  ]
+}
