@@ -1,6 +1,6 @@
 """Ana detektör — YOLO11s-p2 + V2 dilimleme + tam kare, NMS ile birleştirme.
 
-V2 düzeni (2026-09-28 kararı, `results/cikarim_maliyet_ablasyonu/`):
+V2 düzeni (seçim gerekçesi: `results/cikarim_maliyet_ablasyonu/`):
   - 1920×1080 karede 2 kare tile, 1080×1080: x ∈ {0, 840}, y = 0 (yatay %22, dikey %0 örtüşme)
   - Tile'lar modelin imgsz'ine (1280) büyütülür (1.19×) — büyütme human AP için şart
   - Ek olarak tam kare geçişi: 1920×1080 → 1280×720 (letterbox 736×1280)
@@ -8,7 +8,7 @@ V2 düzeni (2026-09-28 kararı, `results/cikarim_maliyet_ablasyonu/`):
   - Birleştirme: sınıf bazlı NMS, IoU 0.5 (GREEDYNMM/NMM ablasyonda hep daha kötüydü)
 
 Birimler: tüm kutular orijinal kare pikselinde, (x1, y1, x2, y2), sol-üst köşe orijin.
-Sınıf id'leri şartname sırası: 0=vehicle 1=human 2=uap 3=uai (model çıktısıyla aynı).
+Sınıf id'leri: 0=vehicle 1=human 2=uap 3=uai (model çıktısıyla aynı, bkz. uav_vision.classes).
 Giriş karesi OpenCV BGR (H, W, 3) uint8 bekler.
 """
 
@@ -20,9 +20,9 @@ from pathlib import Path
 
 import numpy as np
 
-from uav_vision.data import CLASS_NAMES
+from uav_vision.classes import CLASS_NAMES
 
-# V2 sabitleri — değiştirmek maliyet/doğruluk dengesini bozar (sabitler.md → CIKARIM_DUZENI)
+# V2 sabitleri — değiştirmek ablasyonla seçilen maliyet/doğruluk dengesini bozar
 TILE_SIZE = 1080  # px, kare tile kenarı
 IMGSZ = 1280  # modelin eğitim çözünürlüğü; tile'lar ve tam kare buna ölçeklenir
 MERGE_IOU = 0.5  # tile + tam kare tahminlerini birleştiren sınıf bazlı NMS eşiği
@@ -60,7 +60,7 @@ def tile_origins(length: int, tile: int) -> list[int]:
 class Detector:
     """Tek kare → birleştirilmiş tespit listesi.
 
-    >>> det = Detector("uav_runs/.../best.pt")
+    >>> det = Detector("weights/best.pt")
     >>> dets = det(cv2.imread("kare.jpg"))
     """
 
