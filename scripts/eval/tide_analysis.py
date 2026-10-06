@@ -1,11 +1,11 @@
 """TIDE hata analizi — mAP kaybını hata türlerine ayırır (Bolya ve ark., ECCV 2020).
 
-    python scripts/tide_analysis.py preds.json data/coco/instances_sanity.json --out tide.json
+    python scripts/eval/tide_analysis.py preds.json data/coco/instances_holdout.json --out tide.json
 
 Girdi: COCO "results" tahmin json'u (main.py --coco-gt çıktısı) + COCO GT json'u.
 Model çalıştırılmaz; tamamen offline, çıkarım maliyetine etkisi yok.
 
-Hata türleri (IoU eşikleri: ön plan 0.5 = METRIK_G1, arka plan 0.1):
+Hata türleri (IoU eşikleri: ön plan 0.5, arka plan 0.1):
   Cls   kutu doğru yerde (IoU ≥ 0.5), sınıf yanlış
   Loc   sınıf doğru, kutu kaymış (0.1 ≤ IoU < 0.5)
   Both  sınıf yanlış + kutu kaymış
@@ -27,7 +27,7 @@ import argparse
 import json
 from pathlib import Path
 
-POS_IOU = 0.5  # METRIK_G1 = mAP @ IoU 0.5
+POS_IOU = 0.5  # ana metrik: mAP @ IoU 0.5
 BG_IOU = 0.1  # TIDE varsayılanı
 MAX_DETS = 100_000  # pratikte sınırsız
 

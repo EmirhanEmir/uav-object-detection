@@ -1,13 +1,11 @@
 """Değerlendirme girişi — mAP@0.5 (bbox + sınıf).
 
 Kullanım:
-    python scripts/evaluate.py preds.json gt.json
-    python scripts/evaluate.py preds.json gt.json --json sonuc.json --cross-check
+    python scripts/eval/evaluate.py preds.json gt.json
+    python scripts/eval/evaluate.py preds.json gt.json --json sonuc.json --cross-check
 
 - preds.json : COCO "results" formatı [{image_id, category_id, bbox, score}, ...]
 - gt.json    : COCO instances formatı (data/coco/instances_*.json)
-
-Öznitelik (hareket/iniş) skorlaması bu sürümde yok — yalnız bbox + sınıf.
 """
 
 from __future__ import annotations

@@ -1,15 +1,15 @@
-# Çıkarım Maliyeti Ablasyonu (2026-09-25)
+# Çıkarım Maliyeti Ablasyonu
 
 Kısıt: kare başına çıkarım maliyeti mevcut akışın üstüne **çıkamaz**. Amaç, doğruluğu
-koruyarak maliyeti düşürmek. Yeniden eğitim yok; tüm varyantlar Faz 4 ağırlığıyla
-(`baseline-visdrone-yolo11s-p2/weights/best.pt`) çalıştırıldı.
+koruyarak maliyeti düşürmek. Yeniden eğitim yok; tüm varyantlar aynı transfer ağırlığıyla
+(COCO → VisDrone-DET → kendi veri seti, YOLO11s-p2) çalıştırıldı.
 
 - Donanım: RTX 4060 Laptop (8 GB), FP32; süre = wall-clock ms/kare (`cuda.synchronize`)
-- Değerlendirme: `sanity` split'i (175 kare, 1920×1080), mAP@0.5 (kendi VOC evaluator'ümüz)
+- Değerlendirme: `holdout` seti (175 kare, 1920×1080), mAP@0.5 (kendi VOC evaluator'ümüz)
 - GFLOPs: forward başına thop ölçümü (1280² = 115.8, 736×1280 = 66.6), piksel sayısıyla ölçeklendi
 - Yöntem: SAHI'nin dilimleme ve çıkarım kodu kullanıldı. Birleştirilmemiş (ham) tahminler bir kez
   kaydedildi, birleştirme offline olarak SAHI'nin kendi postprocess sınıflarıyla yapıldı.
-  V0, Faz 5 sonucunu birebir tekrar etti (0.8419 / human 0.5664).
+  V0, SAHI tile ablasyonunun sonucunu birebir tekrar etti (0.8419 / human 0.5664).
 
 ## Mevcut akışın maliyeti (V0)
 
@@ -48,7 +48,7 @@ tile ve tam kare geçişlerinin ayrı ayrı ölçülüp toplanmasıyla elde edil
 
 ## Belirsizlik
 
-Sanity setindeki GT: vehicle 306, **human 57**, uap 15, uai 12. Eşli bootstrap (200 tekrar, %95 GA):
+Holdout setindeki GT: vehicle 306, **human 57**, uap 15, uai 12. Eşli bootstrap (200 tekrar, %95 GA):
 
 | Karşılaştırma | Δ mAP | Δ human AP |
 |---|---|---|
@@ -56,8 +56,9 @@ Sanity setindeki GT: vehicle 306, **human 57**, uap 15, uai 12. Eşli bootstrap 
 | V4 − V0 | −0.004 [−0.016, +0.009] | −0.012 [−0.042, +0.016] |
 | V0 (NMS/IOS/0.7) − V0 | +0.017 [+0.002, +0.033] | −0.002 [−0.013, +0.007] |
 
-Karar henüz verilmedi. C4 (tile=1024 / %30) kilidi yerinde; V2 daha büyük bir eval setinde
-doğrulanmalı.
+**Seçim: V2.** Maliyeti %61 düşürüp mAP'yi koruduğu için ana çıkarım düzeni oldu (`main.py`,
+`src/uav_vision/detector/`). human farkı bu örneklemde anlamlı değil; daha büyük bir
+değerlendirme setinde yeniden doğrulanması planlanıyor.
 
 ## Dosyalar
 

@@ -1,7 +1,6 @@
 """Değerlendirme katmanı — mAP@IoU=0.5 (bbox + sınıf).
 
-Bu sürüm kapsamı: sadece kutu + sınıf eşlemesi. Öznitelik-koşullu skorlama
-(hareket/iniş durumu) sonraki bir sürüme bırakıldı.
+Kapsam: kutu + sınıf eşleşmesi.
 
   - matching : greedy tahmin<->GT eşleştirme
   - ap       : PR eğrisinden AP (VOC tüm-nokta + COCO 101-nokta)

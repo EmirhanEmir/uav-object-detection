@@ -1,18 +1,20 @@
-"""Eğitim girişi — baseline (YOLO11s + P2 başlığı, tam kare fine-tune).
+"""Eğitim girişi — YOLO11s + P2 başlığı, tam kare fine-tune.
 
-Kullanım (Colab):
-    python scripts/train.py --config configs/baseline.yaml
-    python scripts/train.py --config configs/baseline.yaml --batch -1 --epochs 200
+Kullanım (GPU ortamı):
+    python scripts/train/train.py --config configs/baseline.yaml
+    python scripts/train/train.py --config configs/visdrone-pretrain.yaml   # transfer aşama 1
+    python scripts/train/train.py --config configs/baseline-visdrone.yaml   # transfer aşama 2
+    python scripts/train/train.py --config configs/baseline.yaml --batch -1 --epochs 200
 
 Sıra:
   1. configs/yolo11-p2.yaml mimarisi kurulur (arch = n/s/m/l/x).
-  2. COCO ağırlığı (yolo11s.pt) omurgaya transfer edilir (kısmi — P2 head sıfırdan).
-  3. configs/data.yaml üzerinde fine-tune.
+  2. COCO ağırlığı (yolo11s.pt) ya da önceki aşamanın .pt'si yüklenir (kısmi transfer).
+  3. Config'teki veri seti üzerinde fine-tune.
   4. Eğitim bitince test split'inde Ultralytics val (hızlı kontrol).
 
-Resmi referans skor için eğitimden sonra:
-    python scripts/predict_to_coco.py <best.pt> test  -> preds_test.json
-    python scripts/evaluate.py preds_test.json data/coco/instances_test.json --cross-check
+Referans skor için eğitimden sonra (kendi evaluator'ümüz):
+    python scripts/eval/predict_to_coco.py <best.pt> test  -> preds_test.json
+    python scripts/eval/evaluate.py preds_test.json data/coco/instances_test.json --cross-check
 """
 
 from __future__ import annotations
@@ -31,7 +33,7 @@ def _load_config(path: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Detektör eğitimi (baseline)")
     parser.add_argument("--config", default="configs/baseline.yaml", help="YAML deney konfigi")
-    # Colab'da hızlı override — verilmezse config'teki değer kullanılır.
+    # Hızlı override — verilmezse config'teki değer kullanılır.
     parser.add_argument("--epochs", type=int)
     parser.add_argument("--batch", type=int)
     parser.add_argument("--imgsz", type=int)
@@ -58,7 +60,7 @@ def main() -> None:
         print(f"[transfer] COCO ağırlığı yükleniyor: {weights} (omurga; P2 head sıfırdan)")
         model.load(weights)
     elif pretrained:
-        # Faz 4 aşama 2: ara-domain (ör. VisDrone) çıktısından başla — kendi .pt yolu.
+        # Transfer aşama 2: ara-domain (ör. VisDrone) çıktısından başla — kendi .pt yolu.
         print(f"[transfer] Ara-domain ağırlığı yükleniyor: {pretrained} (omurga; head sıfırdan)")
         model.load(pretrained)
 
@@ -95,7 +97,7 @@ def main() -> None:
     print(f"\n[{quick_split} / Ultralytics val] mAP50={metrics.box.map50:.4f}  mAP50-95={metrics.box.map:.4f}")
     print("Sınıf-başı AP50:", {model.names[i]: round(float(ap), 4)
                                for i, ap in zip(metrics.box.ap_class_index, metrics.box.ap50, strict=True)})
-    print("\nResmi referans skor için: scripts/predict_to_coco.py + scripts/evaluate.py")
+    print("\nReferans skor için: scripts/eval/predict_to_coco.py + scripts/eval/evaluate.py")
 
 
 if __name__ == "__main__":

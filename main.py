@@ -1,21 +1,21 @@
-"""Ana tespit girişi — HER ZAMAN kararlaştırılmış / o anki en iyi sürüm.
+"""Ana tespit girişi — seçilmiş en iyi sürüm (V2).
 
 Kullanım:
     python main.py --source kare.jpg
-    python main.py --source data/sanity/images --out preds.json
-    python main.py --source data/sanity/images --coco-gt data/coco/instances_sanity.json
+    python main.py --source data/holdout/images --out preds.json
+    python main.py --source data/holdout/images --coco-gt data/coco/instances_holdout.json
 
 Model, ağırlık ve çıkarım düzeni burada sabittir; komut satırından değiştirilemez.
-Deney için başka ağırlık/ayar denenecekse scripts/ altındaki araçlar kullanılır.
-Yeni bir sürüm kararlaştırılınca SADECE aşağıdaki AKTİF SÜRÜM bloğu güncellenir ve
+Başka ağırlık/ayar denemeleri için scripts/ altındaki araçlar kullanılır.
+Yeni bir sürüm seçilince SADECE aşağıdaki AKTİF SÜRÜM bloğu güncellenir ve
 eski sürüm SÜRÜM GEÇMİŞİ'ne eklenir.
 
-Çıktı: kutular orijinal kare pikselinde (x1, y1, x2, y2); sınıf id'leri şartname
-sırası 0=vehicle 1=human 2=uap 3=uai.
+Çıktı: kutular orijinal kare pikselinde (x1, y1, x2, y2); sınıf id'leri
+0=vehicle 1=human 2=uap 3=uai.
 
-SÜRÜM GEÇMİŞİ (sanity, 175 kare, mAP@0.5):
-  v1  Faz 4 ağırlığı + SAHI 6×1024 @1280 + tam kare      0.8419  human 0.5664  303 ms/kare
-  v2  Faz 4 ağırlığı + 2×1080 @1280 + tam kare (V2)       0.8457  human 0.5431  136 ms/kare
+SÜRÜM GEÇMİŞİ (holdout, 175 kare, mAP@0.5):
+  v1  VisDrone transfer ağırlığı + SAHI 6×1024 @1280 + tam kare   0.8419  human 0.5664  303 ms/kare
+  v2  VisDrone transfer ağırlığı + 2×1080 @1280 + tam kare        0.8457  human 0.5432  154 ms/kare
 """
 
 from __future__ import annotations
@@ -31,18 +31,17 @@ sys.path.insert(0, str(ROOT / "src"))
 
 # ── AKTİF SÜRÜM ──────────────────────────────────────────────────────────────
 SURUM = "v2"
-TARIH = "2026-09-28"
-# Faz 4: COCO → VisDrone-DET → bizim veri, YOLO11s-p2, imgsz=1280
-WEIGHTS = ROOT / "uav_runs/visdrone_pre/faz4/baseline-visdrone-yolo11s-p2/weights/best.pt"
-# Çıkarım düzeni: uav_vision.detector (V2 — sabitler.md → CIKARIM_DUZENI)
-CONF = 0.001  # mAP puanlaması için düşük eşik
+# YOLO11s-p2, imgsz=1280, COCO → VisDrone-DET → kendi veri seti (iki aşamalı transfer)
+WEIGHTS = ROOT / "weights/best.pt"
+# Çıkarım düzeni: uav_vision.detector (V2)
+CONF = 0.001  # mAP hesabı için düşük eşik; tüm PR eğrisi görünsün
 # ─────────────────────────────────────────────────────────────────────────────
 
 IMG_EXTS = {".jpg", ".jpeg", ".png", ".bmp"}
 
 
 def load_detector(device: str = "0"):
-    """Aktif sürümün detektörü — diğer modüller (ör. sunucu istemcisi) buradan alır."""
+    """Aktif sürümün detektörü — diğer modüller detektörü buradan alır."""
     from uav_vision.detector import Detector
 
     if not WEIGHTS.exists():
@@ -51,7 +50,7 @@ def load_detector(device: str = "0"):
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=f"Ana tespit ({SURUM}, {TARIH})")
+    parser = argparse.ArgumentParser(description=f"Ana tespit ({SURUM})")
     parser.add_argument("--source", required=True, help="Görsel veya klasör")
     parser.add_argument("--out", default="preds.json")
     parser.add_argument("--device", default="0")
@@ -70,7 +69,7 @@ def main() -> None:
         paths = [p for p in paths if p.name in name_to_id]
 
     det = load_detector(args.device)
-    print(f"[main] sürüm {SURUM} ({TARIH}) — {WEIGHTS.relative_to(ROOT)}")
+    print(f"[main] sürüm {SURUM} — {WEIGHTS.relative_to(ROOT)}")
 
     out: list[dict] | dict[str, list[dict]] = [] if name_to_id else {}
     t0 = time.perf_counter()

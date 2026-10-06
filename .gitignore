@@ -56,12 +56,26 @@ reports/
 configs/data.yaml
 configs/data_tiled.yaml
 
-# Yerelde tutulan modüller
+# Yerelde tutulan modüller (veri hazırlığı + deneysel kodlar)
 scripts/prepare_data.py
 scripts/prepare_sanity.py
+scripts/prepare_tiled_data.py
+scripts/optimize_thresholds.py
+scripts/apply_verifier.py
+scripts/train_verifier.py
+scripts/verifier_data.py
 src/uav_vision/data/
+src/uav_vision/verifier/
+configs/baseline-tiled.yaml
 tests/
 notebooks/
+
+# Yerel deney çıktıları
+results/esik_optimizasyonu/
+results/**/preds_*.json
+
+# Model ağırlıkları
+weights/
 
 # Kök dizinde geçici/deneme betikleri (asla commit edilmez)
 /_*.sh

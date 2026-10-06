@@ -1,7 +1,7 @@
-# Faz 4 — ara-domain eğitim (aşama 1): COCO -> VisDrone-DET.
-# Amaç bizim 4 sınıf değil; backbone'u drone bakışı + küçük nesneye alıştırmak.
+# Transfer aşama 1 — ara-domain eğitim: COCO -> VisDrone-DET.
+# Amaç 4 hedef sınıf değil; omurgayı drone bakışına ve küçük nesneye alıştırmak.
 # Çıktı ağırlığı (best.pt) aşama 2'de (configs/baseline-visdrone.yaml) başlangıç noktası olur.
-# VisDrone lisansı akademik/ticari-olmayan — teslim öncesi şartname netleşmeden ürünleştirme.
+# VisDrone lisansı akademik / ticari olmayan kullanım içindir; bu ağırlıklar da aynı kısıta tabidir.
 name: visdrone-pretrain-yolo11s-p2
 
 model:
@@ -20,7 +20,7 @@ train:
   close_mosaic: 10
   device: 0
   seed: 42
-  project: runs/faz4
+  project: runs/transfer
   workers: 8
 
 eval:

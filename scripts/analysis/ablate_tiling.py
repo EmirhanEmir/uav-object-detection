@@ -1,13 +1,13 @@
-"""Faz 5 — SAHI tile boyutu/overlap ablasyonu (yerel, GPU üzerinde FPS ölçümlü).
+"""SAHI tile boyutu/overlap ablasyonu (GPU üzerinde FPS ölçümlü).
 
-Colab'da FPS önemsiz ama nihai pipeline yerel makinede (RTX 4060 Laptop) çalışacak
-— bu yüzden bu ablasyon Colab'da değil burada, yerelde koşturulur.
+FPS hedef çıkarım donanımında (RTX 4060 Laptop) anlamlı olduğu için ablasyon
+eğitim ortamında değil, yerelde koşturulur.
 
 Kullanım:
-    python scripts/ablate_tiling.py uav_runs/visdrone_pre/faz4/baseline-visdrone-yolo11s-p2/weights/best.pt
+    python scripts/analysis/ablate_tiling.py weights/best.pt
 
 FPS uçtan uca ölçülür: disk okuma + dilimleme + çıkarım + birleştirme (görsel
-başına). En iyi kombinasyon bulununca `sabitler.md`'ye elle kilitlenir (C4 kararı).
+başına). Sonuçlar: results/detect_tile_ablasyonu/.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from pathlib import Path
 
 SPLITS = {
     "test": ("data/uav_ldz/test/images", "data/coco/instances_test.json"),
-    "sanity": ("data/sanity/images", "data/coco/instances_sanity.json"),
+    "holdout": ("data/holdout/images", "data/coco/instances_holdout.json"),
 }
 
 
@@ -77,7 +77,7 @@ def _run_combo(
 def main() -> None:
     parser = argparse.ArgumentParser(description="SAHI tile boyutu/overlap ablasyonu")
     parser.add_argument("weights", help="Eğitilmiş .pt")
-    parser.add_argument("--split", default="sanity", choices=SPLITS)
+    parser.add_argument("--split", default="holdout", choices=SPLITS)
     parser.add_argument("--tile-sizes", type=int, nargs="+", default=[512, 640, 1024])
     parser.add_argument("--overlaps", type=float, nargs="+", default=[0.2, 0.3])
     parser.add_argument("--conf", type=float, default=0.001, help="mAP için düşük tut")
@@ -124,7 +124,6 @@ def main() -> None:
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
     print(f"\n[json] {args.out}")
-    print("\nEn iyi kombinasyonu seçtikten sonra sabitler.md'ye kilitle (C4 kararı).")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 """Arka plan (Bkg) yanlış pozitiflerini gözle incelemek için kırpıntı panosu üretir.
 
-    python scripts/inspect_bkg_fp.py preds.json data/coco/instances_sanity.json \
-        --images data/sanity/images --cls 1 --top 60 --out results/bkg_fp_v2
+    python scripts/analysis/inspect_bkg_fp.py preds.json data/coco/instances_holdout.json \
+        --images data/holdout/images --cls 1 --top 60 --out results/bkg_fp_v2
 
 Bkg tanımı TIDE ile aynı: tahmin, herhangi bir sınıftaki hiçbir GT ile IoU ≥ 0.1
 yapmıyor. Skora göre sıralanır, en yüksek skorlu `--top` tanesi kırpılır.
@@ -22,7 +22,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 BG_IOU = 0.1  # TIDE arka plan eşiği
-POS_IOU = 0.5  # METRIK_G1
+POS_IOU = 0.5  # ana metrik: mAP @ IoU 0.5
 TILE = 192  # panodaki kırpıntı kenarı (px)
 
 

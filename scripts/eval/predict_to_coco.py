@@ -1,9 +1,11 @@
-"""Eğitilmiş modeli bir split üzerinde çalıştır -> COCO "results" JSON üret.
+"""Eğitilmiş modeli bir split üzerinde tam kare çalıştır -> COCO "results" JSON üret.
 
-    python scripts/predict_to_coco.py runs/baseline/baseline-yolo11s-p2/weights/best.pt test
+    python scripts/eval/predict_to_coco.py weights/best.pt test
 
-Çıktı scripts/evaluate.py'ye girer:
-    python scripts/evaluate.py preds_test.json data/coco/instances_test.json --cross-check
+Çıktı scripts/eval/evaluate.py'ye girer:
+    python scripts/eval/evaluate.py preds_test.json data/coco/instances_test.json --cross-check
+
+Dilimlemeli (V2) çıkarımın tahminleri için: python main.py --coco-gt <gt.json>
 
 image_id eşlemesi GT json'daki file_name -> id üzerinden yapılır (sıra/isim garanti).
 Sınıf id'leri modelin çıktısıyla aynı: 0=vehicle 1=human 2=uap 3=uai.
@@ -20,8 +22,8 @@ SPLITS = {
     "train": ("data/uav_ldz/train/images", "data/coco/instances_train.json"),
     "val": ("data/uav_ldz/val/images", "data/coco/instances_val.json"),
     "test": ("data/uav_ldz/test/images", "data/coco/instances_test.json"),
-    # Eğitimde hiç görülmeyen ayrı kaynak (Roboflow) — gerçek genelleme kontrolü.
-    "sanity": ("data/sanity/images", "data/coco/instances_sanity.json"),
+    # Eğitimde hiç görülmeyen ayrı kaynak — dağılım dışı genelleme kontrolü.
+    "holdout": ("data/holdout/images", "data/coco/instances_holdout.json"),
 }
 
 

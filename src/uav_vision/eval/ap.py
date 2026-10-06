@@ -1,8 +1,7 @@
 """Precision-Recall eğrisinden Average Precision (AP).
 
-Şartname "klasik nesne tespiti yöntemlerindeki gibi mAP, IoU eşiği 0.5" diyor
-ama AP eğrisi altındaki alanın hangi yöntemle hesaplanacağını belirtmiyor. Bu
-yüzden iki yaygın yöntemi de raporluyoruz:
+Metrik mAP @ IoU 0.5. AP eğrisi altındaki alan için tek bir standart yok; bu
+yüzden iki yaygın yöntem de raporlanır:
 
   - "voc"     : PASCAL VOC 2012 / tüm-nokta interpolasyonu (monoton precision
                 zarfının recall'e göre integrali).

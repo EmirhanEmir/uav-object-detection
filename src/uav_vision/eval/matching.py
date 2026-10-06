@@ -4,11 +4,10 @@ Puanlama:
   - IoU eşiği 0.5 (sabit).
   - Tahminler güven skoruna göre azalan sırada işlenir.
   - Her tahmin, henüz eşleşmemiş GT'ler içinde IoU'su en yüksek ve >= eşik olana
-    atanır -> TP. Eşleşemeyen tahmin -> FP. Aynı GT'ye ikinci tahmin -> FP
+    atanır -> TP. Eşleşemeyen tahmin -> FP. Aynı GT'ye ikinci tahmin -> FP.
     Hiç eşleşmeyen GT -> FN.
 
-Bu modül öznitelik (hareket/iniş) bakmaz; sadece kutu + sınıf. Öznitelik-koşullu
-skorlama sonraki bir sürüme bırakıldı.
+Bu modül yalnız kutu + sınıfa bakar.
 """
 
 from __future__ import annotations

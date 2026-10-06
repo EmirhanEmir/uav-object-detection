@@ -1,9 +1,9 @@
-# TIDE Hata Analizi — v2 (2026-09-28)
+# TIDE Hata Analizi — V2
 
-- Model: `main.py` v2 (Faz 4 ağırlığı, 2×1080 tile @1280 + tam kare, NMS/IOU/0.5), conf=0.001
-- Set: `sanity` (175 kare), IoU 0.5 (ön plan) / 0.1 (arka plan)
-- Script: `scripts/tide_analysis.py` (tidecv 1.0.1; tek koşu, sınıf başına dAP)
-- Tutarlılık: TIDE AP50 = evaluate.py AP(coco101) (TÜMÜ 84.45, human 54.34)
+- Model: `main.py` v2 (transfer ağırlığı, 2×1080 tile @1280 + tam kare, NMS/IOU/0.5), conf=0.001
+- Set: `holdout` (175 kare), IoU 0.5 (ön plan) / 0.1 (arka plan)
+- Script: `scripts/eval/tide_analysis.py` (tidecv 1.0.1; tek koşu, sınıf başına dAP)
+- Tutarlılık: TIDE AP50 = `evaluate.py` AP(coco101) (TÜMÜ 84.45, human 54.34)
 
 ## dAP — bu hata türü düzelseydi AP kaç puan artardı
 

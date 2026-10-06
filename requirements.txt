@@ -1,5 +1,5 @@
-# Yerel ortam — veri katmanı ve değerlendirme işleri (hafif, torch YOK).
-# Eğitim/çıkarım bağımlılıkları için: requirements-train.txt (Colab).
+# Çekirdek ortam — değerlendirme ve analiz araçları (hafif, torch yok).
+# Model çalıştırmak (çıkarım / eğitim) için: requirements-train.txt.
 # Python 3.10+
 
 # Çekirdek

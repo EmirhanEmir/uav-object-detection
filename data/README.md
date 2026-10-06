@@ -6,12 +6,13 @@ Beklenen yerleşim:
 
 ```
 data/
-├── raw/                 # etiketli export'lar (dokunulmaz)
-├── uav_ldz/             # işlenmiş, eğitime hazır (YOLO formatı)
-│   ├── images/{train,val,test}
-│   └── labels/{train,val,test}
-└── coco/                # COCO json'lar (eval için)
+├── uav_ldz/             # eğitime hazır veri seti (YOLO formatı)
+│   ├── train/{images,labels}
+│   ├── val/{images,labels}
+│   └── test/{images,labels}
+├── holdout/images/      # eğitimde hiç görülmeyen ayrı kaynak — ana değerlendirme seti
+└── coco/                # COCO GT json'ları (instances_{train,val,test,holdout}.json)
 ```
 
-Export alma, sınıf remap ve dönüştürme adımları yerelde yürütülür; bu adımların
-kodu ve verinin kendisi depoya dahil değildir.
+Veri hazırlama adımları (export, sınıf eşleme, dönüştürme) ve verinin kendisi depoya
+dahil değildir. Depo tespit ve değerlendirme koduna odaklanır.

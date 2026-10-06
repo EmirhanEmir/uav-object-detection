@@ -1,5 +1,5 @@
 # Baseline deney konfigi — YOLO11s + P2 başlığı, tam kare (dilimleme YOK).
-# Bu skor sonraki denemelerin (transfer, dilimleme, iyileştirme) referans noktası.
+# Bu skor sonraki deneylerin (transfer, dilimleme) referans noktası.
 name: baseline-yolo11s-p2
 
 model:
@@ -13,7 +13,7 @@ data:
 
 train:
   epochs: 150
-  batch: 32                  # ~40GB GPU @ imgsz 1280, yolo11s-p2 (-1 = otomatik)
+  batch: 32                  # ~40 GB GPU @ imgsz 1280, yolo11s-p2 (-1 = otomatik)
   patience: 40               # early stop
   close_mosaic: 15           # son 15 epoch mozaik kapalı
   device: 0
@@ -23,6 +23,6 @@ train:
 
 eval:
   iou: 0.5
-  # eğitim sonrası: Ultralytics val (hızlı) + kendi eval aracı (resmi referans)
-  # scripts/predict_to_coco.py -> scripts/evaluate.py
+  # eğitim sonrası: Ultralytics val (hızlı) + kendi eval aracı (referans skor)
+  # scripts/eval/predict_to_coco.py -> scripts/eval/evaluate.py
   splits: [test]

@@ -1,6 +1,6 @@
 # YOLO11 + P2 (stride-4) tespit başlığı — küçük nesne (yukarıdan görünüm insan) için.
 # Kaynak: Ultralytics yolo11.yaml omurgası + yolov8-p2.yaml kalıbıyla eklenen P2 başlığı.
-# Detect artık 4 seviye: P2/4, P3/8, P4/16, P5/32.
+# Detect 4 seviye: P2/4, P3/8, P4/16, P5/32.
 # COCO ağırlığı `model.load("yolo11s.pt")` ile omurgaya (katman 0-10) transfer edilir;
 # kaydırılan/yeni head katmanları sıfırdan başlar (kısmi transfer — baseline için kabul).
 

@@ -1,4 +1,4 @@
-# Eğitim / çıkarım ortamı — genelde Colab (GPU). Yerelde kurmak zorunlu değil.
+# Çıkarım / eğitim ortamı (GPU önerilir). main.py ve scripts/train/ bunu gerektirir.
 -r requirements.txt
 
 # Tespit / eğitim
